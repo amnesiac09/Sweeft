@@ -1,0 +1,29 @@
+create table teacher (
+	id int primary key,
+    first_name varchar(20),
+    last_name varchar(20),
+    gender varchar(10),
+    subj varchar(20)
+);
+
+create table pupil (
+	id int primary key,
+    first_name varchar(20),
+    last_name varchar(20),
+    gender varchar(10),
+    class varchar(20)
+);
+
+create table subjects (
+	subj varchar(20),
+    teacher_id int,
+    pupil_id int,
+    foreign key(subj) references teacher(subj),
+    foreign key(teacher_id) references teacher(id),
+    foreign key(pupil_id) references pupil(id)
+);
+
+select t.id, t.first_name, t.last_name, t.gender, t.subj from pupil p
+inner join subjects s on s.pupil_id = p.id
+inner join teacher t on s.teacher_id = t.id
+where p.first_name = "გიორგი";
